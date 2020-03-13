@@ -1,0 +1,11 @@
+.transactions-table td{
+ padding-left: .5rem;
+}
+.transactions-table th{
+    padding-left: .5rem;
+    
+}
+
+.transactions-table td{
+    vertical-align:baseline;
+}

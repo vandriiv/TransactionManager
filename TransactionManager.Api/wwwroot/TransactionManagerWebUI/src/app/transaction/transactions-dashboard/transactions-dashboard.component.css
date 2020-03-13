@@ -1,0 +1,23 @@
+input[type=file]{
+    display: none;
+}
+
+.dashboard-select-group{
+    display: flex;  
+}
+
+.file-operation-buttons button:last-of-type{
+    margin-left: 14px;
+}
+
+.select-group .select-item:first-of-type{
+    margin-right: 14px;
+}
+
+.transactions-dashboard-header{
+    margin-bottom: 14px;
+}
+
+.upload-errors-alert p{
+    margin-bottom: 0;
+}

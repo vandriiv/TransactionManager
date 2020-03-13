@@ -1,0 +1,9 @@
+<div class="app-select">
+<label *ngIf="labelValue" for="{{selectName}}">{{labelValue}}</label>
+<select [formControl]="select" id={{selectName}} (change)="handleChange()" class="form-control form-control-sm">   
+    <option *ngFor="let s of data | keyvalue" [ngValue] = "s.key">
+       {{s.value}}
+    </option>
+</select>
+</div>
+

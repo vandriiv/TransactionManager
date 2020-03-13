@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4 class="modal-title">Update transaction status</h4>
+    <button type="button" class="close" aria-label="Close" (click)='cancel()'>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editForm">
+        <div class="form-group">
+          <label for="id">Id</label>
+          <input type="text" class="form-control" formControlName="id" readonly>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-control" formControlName="status">
+            <option *ngFor="let s of transactionStatuses | keyvalue" [ngValue] = "s.key">
+                {{s.value}}
+             </option>
+          </select>
+        </div>
+        </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)='cancel()'>Cancel</button>
+    <button type="button" class="btn btn-primary"(click)='confirm()'>Update</button>
+  </div>
+  

@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-between transactions-dashboard-header">
+  <div class="dashboard-select-group flex-fill align-items-center select-group">
+    <app-shared-select class="select-item" (onSelectChange)="statusSelectChanged($event)" [data]="transactionStatuses"
+      [selectName]="'transaction-status-select'"></app-shared-select>
+    <app-shared-select class="select-item" (onSelectChange)="typeSelectChanged($event)" [data]="transactionTypes"
+      [selectName]="'transaction-type-select'"></app-shared-select>
+  </div>
+
+  <div class="flex-fill d-flex justify-content-end align-items-center file-operation-buttons">
+    <input type="file" [formControl]="fileImport" placeholder="Import" (change)="uploadFile($event)" accept=".csv"
+      id="transactions-file-import">
+    <button type="button" class="btn btn-outline-secondary btn-small" (click)="openFileDialog()">Import</button>
+
+    <button type="button" class="btn btn-outline-secondary btn-small" (click)="exportFile()">Export</button>
+  </div>  
+</div>
+
+<div *ngIf="uploadDataTypeError!==null" class="alert alert-danger alert-dismissible fade show upload-errors-alert" role="alert">
+  <h5 class="alert-heading">File import error occured.</h5>
+    <p>{{uploadDataTypeError.message}}</p>
+    <p>Row: {{uploadDataTypeError.row}}</p>
+    <p>Record: {{uploadDataTypeError.record}}</p>   
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
+</div>
+
+<div *ngIf="uploadDataFormatError!==null" class="alert alert-danger alert-dismissible fade show upload-errors-alert" role="alert">
+  <h5 class="alert-heading">Imported file contrains invalid data</h5>    
+    <p>Row: {{uploadDataFormatError.row}}</p>
+    <ul>
+      <li *ngFor="let failure of uploadDataFormatError.failures | keyvalue">{{failure.key}} : {{failure.value}}</li>
+    </ul>  
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
+</div>
+
+<div>
+  <app-transactions-table (onDelete)="openDeleteTransactionModal($event)" (onEdit)="openEditTransactionModal($event)" [transactions]="transactions"></app-transactions-table>
+  <app-pagination (goPage)="goToPage($event)" (goPrev)="goToPrevious()" (goNext)="goToNext()" [page]="page"
+    [perPage]="limit" [count]="total">
+  </app-pagination>
+</div>
